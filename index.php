@@ -50,9 +50,11 @@
 			</div>
 		</section>
 		
+		
+		
 	<!-- TEMPORARY TOP IMAGE LAYOUT - NO VOTING SYSTEM YET, JUST PLACEHOLDERS (of our own cats) -->
-	
 	<section class="no-padding" id="portfolio">
+					<h3> Cats of the Month of March </h3>
         <div class="container-fluid">
             <div class="row no-gutter">
                 <div class="col-lg-4 col-sm-6">
