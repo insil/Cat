@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 if(empty($errors)){
 	   require('connect.php');
-	$q = "INSERT INTO newacc (email, `password`)
+	$q = "INSERT INTO newacc (email, password)
 	VALUES ('$name' , '$email' , NOW() )";
 	$result = @mysqli_query ($conn, $q);
 	if ($result){
