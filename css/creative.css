@@ -12,6 +12,10 @@ body {
 	background-image: url(../img/header1.jpg);
 }
 
+.form-field{
+	color: #2b2024;
+}
+
 body {
     font-family: Merriweather,'Helvetica Neue',Arial,sans-serif;
 }
@@ -45,7 +49,7 @@ h4,
 h5,
 h6 {
     font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
-	color: #FFF;
+	color: #fff;
 }
 
 p {
