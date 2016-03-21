@@ -38,9 +38,8 @@
 								<label>Password:</label>
 								<input type="password" id="password" name="password" placeholder="******"/>
 				
-						<div class="btn btn-default btn-xl wow tada" id="login" name="login">
-							Login
-						</div>
+						<a href="login.php" class="btn btn-default btn-xl wow tada" id="login" name="login">
+							Login</a>
 				
 							<a href="register.php" class="btn btn-default btn-xl wow tada" name="register" id="register">
 								New User Registration</a>

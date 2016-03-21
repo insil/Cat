@@ -8,7 +8,7 @@
 		<meta name="author" content="Negin Sauermann & Richard Sage">
 		
 		<!-- Bootstrap/CSS Import FrontEnd Framework -->
-		<link rel="stylesheet" href="css/bootstrap.css" type="text/css"></head>
+		<link rel="stylesheet" href="css/bootstrap.css" type="text/css">
 	
 		<!-- Custom Fonts -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -18,6 +18,8 @@
 		<link rel="stylesheet" href="css/animate.min.css" type="text/css">
 		<!-- Custom CSS -->
 		<link rel="stylesheet" href="css/creative.css" type="text/css">	
+	</head>
+	
 	<body>
 	
 	<?php include 'navigation.php';?>
