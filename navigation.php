@@ -5,7 +5,7 @@
 							<a class="page-scroll" href="index.php">Main page</a>
 						</li>
 						<li>
-							<a class="page-scroll" href="user.php">User Account</a>
+							<a class="page-scroll" href="profile.php">User Account</a>
 						</li>
 						<li>
 							<a class="page-scroll" href="admin.php">Admin Panel</a>
