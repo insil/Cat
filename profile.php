@@ -1,3 +1,10 @@
+<?php
+session_start(); // Starting Session
+require_once('config.php');
+	$link = mysqli_connect($db_host, $db_user, $db_pass, $db_name) or die ('Your DB connection is misconfigured. Enter the correct values and try again.');
+	//$query = mysqli_query(
+?>
+
 <html>
     <head>
         <title>SUPER AWESOME CAT PHOTOS</title>
@@ -23,18 +30,31 @@
 	<body>
 	
 	<?php include 'navigation.php';?>
+	
+	<h1> Welcome, <?php 
+	echo $_SESSION['login_user']; ?> !</h1>
+	
 
 <!-- upload file script-->		
 <?php
-	$img_target_dir = "uploads/img/"; //puts stuff in uploads
-	$target_file2 = $img_target_dir. basename($_FILES["imgfile"]["name"]); //img file
-	$uploadOk = 1;
 
-	$imageFileType = pathinfo($target_file2,PATHINFO_EXTENSION);
+	if(!file_exists ("uploads/".$_SESSION['login_user']){ //putting the image file into the username's folder (same name as the username, hence why we made it only numbers and letters)!
+	
+		$img_target_dir = "uploads/".$_SESSION['login_user']; //puts stuff in uploads
+		$target_file2 = $img_target_dir. basename($_FILES["imgfile"]["name"]); //img file
+		$uploadOk = 1;
+
+		$imageFileType = pathinfo($target_file2,PATHINFO_EXTENSION);
+		echo $imageFileType;
+	}
+	else{
+		mkdir("uploads/".$_SESSION['login_user'], 0777, true);
+	}
+	
 	
 	// Allow certain file formats for images (png)
 	// Check if image file is a actual image or fake image
-	if(isset($_POST["submit"])) {
+	if(isset($_POST['submit'])) {
 		if($imageFileType != "png" ) {
 			echo "Sorry, only PNG.";
 			$uploadOk = 0;
@@ -53,7 +73,7 @@
 		echo "Sorry, your file was not uploaded.";
 	// if everything is ok, try to upload file
 		} else {
-			if (move_uploaded_file($_FILES["imgfile"]["name"], $img_target_dir) {
+			if (move_uploaded_file($_FILES["imgfile"]["name"], $img_target_dir)) {
 				//rename("tmp_name","lab2_upload");
 				echo "<br>";
 				echo "The file ". basename( $_FILES["imgfile"]["name"]). " has been uploaded.";				
@@ -73,12 +93,6 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2 text-center">
-		
-					<h1> Welcome "name"</h1>
-					
-				<!-- Update information, to be completed --> 	
-					<h5> Change your username? </h5>
-					<h5> Change your password?</h5>
 
 				<!-- Upload image-->	
 					<h2> Image Upload </h2>
@@ -87,9 +101,10 @@
 					
 					<form action="profile.php" method="post" enctype="multipart/form-data">
 
-						<div><h2>Upload a PNG file: </h2><input type="file" name="imgfile" id="imgfile">
+						<div><h2>Upload a PNG file: </h2>
+						<input class="btn btn-default btn-xl wow tada" id="imgfile" type="file" name="imgfile" value="imgfile">
 							<br>
-							<input type="submit" value="Upload" name="submit">
+							<input class="btn btn-default btn-xl wow tada" id="Upload" type="submit" name="submit" value="Upload">
 						</div>
 	
 					</form>
@@ -99,18 +114,14 @@
 	</section>
 
 		<!-- scripts from Creative -->
-	
 		 <!-- jQuery -->
 		<script src="js/jquery.js"></script>
-
 		<!-- Bootstrap Core JavaScript -->
 		<script src="js/bootstrap.min.js"></script>
-
 		<!-- Plugin JavaScript -->
 		<script src="js/jquery.easing.min.js"></script>
 		<script src="js/jquery.fittext.js"></script>
 		<script src="js/wow.min.js"></script>
-
 		<!-- Custom Theme JavaScript -->
 		<script src="js/creative.js"></script>
 	</body>

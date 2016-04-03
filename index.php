@@ -1,9 +1,9 @@
 	<?php require_once('config.php');
 	$link = mysqli_connect($db_host, $db_user, $db_pass, $db_name) or die ('Your DB connection is misconfigured. Enter the correct values and try again.');
-	$query = mysqli_query(
-	  'SELECT idImages, votes
-	  FROM  Images
-	  LIMIT 0 , 15');
+	//$query = mysqli_query(
+	  //'SELECT idImages, votes
+	  //FROM  Images
+	  //LIMIT 0 , 15');
 	?>
 
 <html>

@@ -16,22 +16,35 @@ body {
 	color: #2b2024;
 }
 
-/* voting style */
-.vote-span{
-  width: 60px;
-  float: left;
-  margin: 5px 0;
+
+.box1
+{
+float:left; 
+height:80px; 
+width:50px;
 }
-.vote, .vote-score{
-  clear: both;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  text-align: center;
-  color: #333;
-  font-size: 1.8em;
-  font-weight: bold;
+.box2
+{
+float:left; 
+width:440px;
+text-align:left;
+margin-left:10px;
+height:60px;
+margin-top:10px;
+font-weight:bold;
+font-size:18px;
 }
-.vote-score{cursor: text}
+.up
+{
+height:40px; 
+font-size:24px; 
+text-align:center;
+background-color:#009900; 
+margin-bottom:2px;
+-moz-border-radius: 6px;
+-webkit-border-radius: 6px;
+}
+
 
 body {
     font-family: Merriweather,'Helvetica Neue',Arial,sans-serif;
