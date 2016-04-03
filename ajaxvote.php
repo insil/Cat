@@ -6,7 +6,7 @@
 	dbConnect();
 	if ($_SERVER['HTTP_X_REQUESTED_WITH']) {
 	  if (isset($_POST['idImage']) AND isset($_POST['action'])) {
-		$postId = (int) mysql_real_escape_string($_POST['idImage']);
+		$idImage = (int) mysql_real_escape_string($_POST['idImage']);
 		# check if already voted, if found voted then return
 		if (isset($_SESSION['votes'][$idImage])) return;
 		# connect mysql db
@@ -14,17 +14,17 @@
 
 		# query into db table to know current voting score 
 		$query = mysql_query("
-		  SELECT Images
-		  from votes
+		  SELECT votes
+		  from Images
 		  WHERE id = '{$idImages}' 
 		  LIMIT 1" );
 
 		# increase or dicrease voting score
 		if ($data = mysql_fetch_array($query)) {
 		  if ($_POST['action'] === 'up'){
-			$vote = ++$data['votes'];
+			$votes = ++$data['votes'];
 		  } else {
-			$vote = --$data['votes'];
+			$votes = --$data['votes'];
 		  }
 		  # update new voting score
 		  mysql_query("
