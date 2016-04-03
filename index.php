@@ -39,16 +39,15 @@
 		 
 					<h1>Cat Image Sharing Fanclub (logo here)</h1>
 						Create or login to vote on your favorite cat images! =^_^=
-						<form method="post">
+						<form method="post" action="login.php">
 									<div class="form-field">
-								<label for="email">Email: </label>
-								<input type="text" id="email" name="email" placeholder="catlover@awesomecats.com"/>
+								<label for="user">Username: </label>
+								<input type="text" id="user" name="user" placeholder="catlover"/>
 				
 								<label>Password:</label>
 								<input type="password" id="password" name="password" placeholder="******"/>
 				
-						<a href="login.php" class="btn btn-default btn-xl wow tada" id="login" name="login">
-							Login</a>
+							<input class="btn btn-default btn-xl wow tada" id="login" type="submit" name="login" value="login">
 				
 							<a href="register.php" class="btn btn-default btn-xl wow tada" name="register" id="register">
 								New User Registration</a>
@@ -177,51 +176,6 @@
 		
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		
-	<!-- JQuery voting script, retrieved from: http://www.w3bees.com/2013/09/voting-system-with-jquery-php-and-mysql.html -->
-		<script>
-		$(document).ready(function(){
-		  // ajax setup
-		  $.ajaxSetup({
-			url: 'ajaxvote.php',
-			type: 'POST',
-			cache: 'false'
-		  });
-
-		  // any voting button (up/down) clicked event
-		  $('.vote').click(function(){
-			var self = $(this); // cache $this
-			var action = self.data('action'); // grab action data up/down 
-			var parent = self.parent().parent(); // grab grand parent .item
-			var postid = parent.data('postid'); // grab post id from data-postid
-			var score = parent.data('score'); // grab score form data-score
-
-			// only works where is no disabled class
-			if (!parent.hasClass('.disabled')) {
-			  // vote up action
-			  if (action == 'up') {
-				// increase vote score and color to orange
-				parent.find('.vote-score').html(++score).css({'color':'orange'});
-				// change vote up button color to orange
-				self.css({'color':'orange'});
-				// send ajax request with post id & action
-				$.ajax({data: {'postid' : postid, 'action' : 'up'}});
-			  }
-			  // voting down action
-			  else if (action == 'down'){
-				// decrease vote score and color to red
-				parent.find('.vote-score').html(--score).css({'color':'red'});
-				// change vote up button color to red
-				self.css({'color':'red'});
-				// send ajax request
-				$.ajax({data: {'postid' : postid, 'action' : 'down'}});
-			  };
-
-			  // add disabled class with .item
-			  parent.addClass('.disabled');
-			};
-		  });
-		});
-		</script>
 		
 	</body>
 </html>
