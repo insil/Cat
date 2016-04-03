@@ -3,7 +3,7 @@
 define('DB_HOST',    'db.cs.dal.ca');
 define('DB_USER',    'negin');
 define('DB_PASS',    'B00667452');
-define('DB_NAME',    'negin');
+define('DB_NAME',    'INFX2670');
 
 # db connect
 function dbConnect($close=true){
