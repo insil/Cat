@@ -28,7 +28,6 @@
 
 
 <?php
-	//error handling ref: http://www.codingcage.com/2015/01/user-registration-and-login-script-using-php-mysql.html //https://www.youtube.com/watch?v=ngqeWUIDlnk phpmyacademy
 		 $emailErr = $passwordErr = $confirmpassErr = "";
 		 $email = $password = $passwordconfirm = "";
 		
@@ -70,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    }
 
 if(empty($errors)){
-	   require('connect.php');
+	   require('config.php');
 	$q = "INSERT INTO newacc (email, password)
 	VALUES ('$name' , '$email' , NOW() )";
 	$result = @mysqli_query ($conn, $q);
@@ -100,33 +99,33 @@ if(empty($errors)){
 
 			<!-- SIGN UP FORM -->
 				<form method="post" action="register.php">
-				<fieldset>
+					<fieldset>
 					<h1>Registration:</h1>
-				<div id="container">
+					<div id="container">
 
-					<!--email-->
-					<div class="form-field">
-						<label for="email">Email:</label>
-						<input type="text" id="email" name="email" placeholder="catlover@meow.com"= value="<?php echo $email;?>">
-						<span class="error">* <?php echo $emailErr;?></span>
+						<!--email-->
+						<div class="form-field">
+							<label for="email">Email:</label>
+							<input type="text" id="email" name="email" placeholder="catlover@meow.com"= value="<?php echo $email;?>">
+							<span class="error">* <?php echo $emailErr;?></span>
+						</div>
+						<!--password-->
+						<div class="form-field">
+							<label for="password">Password:</label>
+							<input type="text" id="password" name="password" placeholder="*******" value="<?php echo $password;?>">
+							<span class="error">* <?php echo $passwordErr;?></span>
+						</div>
+						<!--passwordconfirmation-->
+						<div class="form-field">
+							<label for="passwordconfirm">Confirmation password:</label>
+							<input type="text" id="passwordconfirm" name="passwordconfirm" placeholder="*******" value="<?php echo $passwordconfirm;?>">
+							<span class="error">* <?php echo $passwordconfirmErr;?></span>
+						</div>
+					
+					
+						<!-- submit-->
+						<input class="btn btn-default btn-xl wow tada" id="submit" type="submit" name="submit" value="Register">
 					</div>
-					<!--password-->
-					<div class="form-field">
-						<label for="password">Password:</label>
-						<input type="text" id="password" name="password" placeholder="*******" value="<?php echo $password;?>">
-						<span class="error">* <?php echo $passwordErr;?></span>
-					</div>
-					<!--passwordconfirmation-->
-					<div class="form-field">
-						<label for="passwordconfirm">Confirmation password:</label>
-						<input type="text" id="passwordconfirm" name="passwordconfirm" placeholder="*******" value="<?php echo $passwordconfirm;?>">
-						<span class="error">* <?php echo $passwordconfirmErr;?></span>
-					</div>
-				
-				
-					<!-- submit-->
-					<input class="btn btn-default btn-xl wow tada" id="submit" type="submit" name="submit" value="Register">
-				</div>
 			</div>
 
 		</div>
