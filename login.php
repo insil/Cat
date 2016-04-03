@@ -9,8 +9,9 @@ if (empty($_POST['email']) || empty($_POST['password'])) {
 	{
 	$email=$_POST['email'];
 	$psword=$_POST['password'];
-	require('connect.php');
-	$query = mysqli_query($conn, "select * from newacc where `password`='$psword' AND `email`='$email'");
+	require_once('config.php');
+	$link = mysqli_connect($db_host, $db_user, $db_pass, $db_name) or die ('Your DB connection is misconfigured. Enter the correct values and try again.');
+	$query = mysqli_query($link, "select * from newacc where `password`='$psword' AND `email`='$email'");
 	$rows = mysqli_num_rows($query);
 	if ($rows == 1) {
 	$_SESSION['login_user']=$email; // Initializing Session
@@ -18,7 +19,7 @@ if (empty($_POST['email']) || empty($_POST['password'])) {
 	} else {
 	$error = "Username or Password is invalid";
 	}
-	mysqli_close($conn); // Closing Connection
+	mysqli_close($link); // Closing Connection
 	}
 	}
 ?>

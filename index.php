@@ -1,6 +1,5 @@
-	<?php include('config.php'); 
-	 //connects to db, setting up image voting function
-	dbConnect();
+	<?php require_once('config.php');
+	$link = mysqli_connect($db_host, $db_user, $db_pass, $db_name) or die ('Your DB connection is misconfigured. Enter the correct values and try again.');
 	$query = mysqli_query(
 	  'SELECT idImages, votes
 	  FROM  Images
