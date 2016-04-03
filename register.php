@@ -74,7 +74,7 @@ if(empty($errors)){
 	$link = mysqli_connect($db_host, $db_user, $db_pass, $db_name) or die ('Your DB connection is misconfigured. Enter the correct values and try again.');
 	$hash = sha1($password); //hashes password
 	//$password = hash('sha256',$passcode);
-	$q = "INSERT INTO Users (user, password) VALUES ('$user' , '$hash' )";
+	$q = "INSERT INTO `infx2670`.Users (user, password) VALUES ('$user' , '$hash' )";
 	echo $q;
 	$result = mysqli_query ($link, $q);
 	if ($result){
