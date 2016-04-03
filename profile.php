@@ -77,15 +77,9 @@
 					<h1> Welcome "name"</h1>
 					
 				<!-- Update information, to be completed --> 	
-					<h5> Change your email? </h5>
+					<h5> Change your username? </h5>
 					<h5> Change your password?</h5>
-					
-					
-					
-					
-					
-					
-					
+
 				<!-- Upload image-->	
 					<h2> Image Upload </h2>
 					<h4> Ensure that the file upload is a PNG file!</h4>
@@ -97,17 +91,13 @@
 							<br>
 							<input type="submit" value="Upload" name="submit">
 						</div>
-
-					
+	
 					</form>
 				</div>
 			</div>
 		</div>
 	</section>
-		
-		
-		
-		
+
 		<!-- scripts from Creative -->
 	
 		 <!-- jQuery -->

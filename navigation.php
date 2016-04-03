@@ -13,9 +13,6 @@
 						<li>
 							<a class="page-scroll" href="logout.php">Sign Out</a>
 						</li>
-						<li>
-							<a class="page-scroll" href="">Contact Us</a>
-						</li>
 					</ul>
 				</div>
 				<!-- /.navbar-collapse -->

@@ -1,5 +1,5 @@
 <?php
-require('connect.php');
+require('config.php');
 
 session_start();// Starting Session
 // Storing Session

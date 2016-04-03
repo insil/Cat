@@ -28,24 +28,22 @@
 
 
 <?php
-		 $emailErr = $passwordErr = $confirmpassErr = "";
-		 $email = $password = $passwordconfirm = "";
-		
-		
-
+		 $userErr = $passwordErr = "";
+		 $user = $password = $passwordconfirm = "";
+		 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$errors = array();
 	
-   //email
-   if (empty($_POST['email'])) {
-     $emailErr = "Email is required!";
-	 $errors[]=$emailErr;
+   //username
+   if (empty($_POST['user'])) {
+     $userErr = "Username is required!";
+	 $errors[]=$userErr;
    } else {
-     $email = trim($_POST['email']);
+     $user = trim($_POST['user']);
 
-     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { 
-       $emailErr = "Invalid email format!";
-		$errors[]=$emailErr;	   
+     if (!ctype_alnum($user)) { //validating so that username is only in letters and numbers
+       $userErr = "Username must only be in letters and numbers!";
+		$errors[]=$userErr;	   
      }
    }
    //password + confirm
@@ -60,29 +58,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      $passwordconfirmErr = "Passwords must match!";
 	 $errors[]=$passwordconfirmErr;
    } else {
-     $passwordconfirmErr = trim($_POST['passwordconfirm']);
+     $passwordconfirm = trim($_POST['passwordconfirm']);
   
      if ($passwordconfirm!=$password) { //checks to see if they match
        $passwordconfirmErr = 'Passwords must match!';
 		$errors[]=$passwordconfirmErr;	   
+		echo $passwordconfirm;
+		echo $password;
      }
    }
 
 if(empty($errors)){
-	   require('config.php');
-	$q = "INSERT INTO newacc (email, password)
-	VALUES ('$name' , '$email' , NOW() )";
-	$result = @mysqli_query ($conn, $q);
+	require('config.php');
+	dbConnect(true);
+	$hash = sha1($password); //hashes password
+	//$password = hash('sha256',$passcode);
+	$q = "INSERT INTO Users (user, password)
+	VALUES ('$user' , '$hash' )";
+	echo $q;
+	$result = mysqli_query ($link, $q);
 	if ($result){
-		header("location: confirm.php");
+		header("location: index.php");
 		exit();
 	}
 	else{
 		echo 'System Error
 		<p class="error">Due to a system error registration did not complete, sorry!</p>';
-		echo '<p>' . mysqli_error($conn) . '<br><br>Query: ' . $q . '</p>';
+		echo '<p>' . mysqli_error($link) . '<br><br>Query: ' . $q . '</p>';
 		}
-	mysqli_close($conn);
+	mysqli_close($link);
 	exit();
 	}
 	else{
@@ -103,11 +107,11 @@ if(empty($errors)){
 					<h1>Registration:</h1>
 					<div id="container">
 
-						<!--email-->
+						<!--username-->
 						<div class="form-field">
-							<label for="email">Email:</label>
-							<input type="text" id="email" name="email" placeholder="catlover@meow.com"= value="<?php echo $email;?>">
-							<span class="error">* <?php echo $emailErr;?></span>
+							<label for="user">Username:</label>
+							<input type="text" id="user" name="user" placeholder="catlover"= value="<?php echo $user;?>">
+							<span class="error">* <?php echo $userErr;?></span>
 						</div>
 						<!--password-->
 						<div class="form-field">

@@ -1,7 +1,7 @@
 	<?php include('config.php'); 
 	 //connects to db, setting up image voting function
 	dbConnect();
-	$query = mysql_query(
+	$query = mysqli_query(
 	  'SELECT idImages, votes
 	  FROM  Images
 	  LIMIT 0 , 15');
@@ -28,27 +28,7 @@
 		<!-- Custom CSS -->
 		<link rel="stylesheet" href="css/creative.css" type="text/css">	
 	<body>
-	 <div class="wrap">
-		<?php while($row = mysql_fetch_array($query)): ?>
-		<div class="item" data-postid="<?php echo $row['id'] ?>" data-score="<?php echo $row['vote'] ?>">
-		  <div class="vote-span"><!-- voting-->
-			<div class="vote" data-action="up" title="Vote up">
-			  <i class="icon-chevron-up"></i>
-			</div><!--vote up-->
-			<div class="vote-score"><?php echo $row['vote'] ?></div>
-			<div class="vote" data-action="down" title="Vote down">
-			  <i class="icon-chevron-down"></i>
-			</div><!--vote down-->
-		  </div>
-
-		  <div class="post"><!-- post data -->
-			<h2><?php echo $row['first_name'].' '.$row['last_name']?></h2>
-			<p><?php echo $row['film_info'] ?></p>
-		  </div>
-		</div><!--item-->
-		<?php endwhile?>
-	  </div>
-	  <?php dbConnect(false); ?>
+	
 	
 	<?php include 'navigation.php';?>
 
