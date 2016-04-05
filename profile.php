@@ -44,6 +44,7 @@ require_once('config.php');
 	
 	$img_target_dir = "uploads/".$_SESSION['login_user']; //puts stuff in uploads
 	$target_file2 = $img_target_dir. basename($_FILES["imgfile"]["name"]); //img file
+	echo $_FILES["imgfile"]["name"];
 	$uploadOk = 1;
 	$imageFileType = pathinfo($target_file2,PATHINFO_EXTENSION);
 	
@@ -52,31 +53,26 @@ require_once('config.php');
 	// Allow certain file formats for images (png)
 	// Check if image file is a actual image or fake image
 	if(isset($_POST['submit'])) {
-		if($imageFileType != "png" ) {
-			echo "Sorry, only PNG.";
-			$uploadOk = 0;
-		}
-		else{
+		if($imageFileType == "png") {
 			$check = getimagesize($_FILES["imgfile"]["tmp_name"]);
-			if($check !== false) {
-				echo "File is an image " . $check["mime"] . ".";
-				$uploadOk = 1;
-			} else {
-				echo "File is not an image.";
-				$uploadOk = 0;
+			echo $img_target_dir . "/" . $_FILES["imgfile"]["name"];
+			if($check != false) {
+				if (move_uploaded_file($_FILES["imgfile"]["name"], $img_target_dir . "/" . $_FILES["imgfile"]["name"])) {
+					//chmod("uploads/img/lab2_upload.png",0777);
+					//echo "Image file size: ";
+					//echo filesize("uploads/img/lab2_upload.png") . "<br>";
+					//echo '<img src= "uploads/img/lab2_upload.png" height="300" width="300">';
+				}
+				else {
+					echo "file was not uploaded";
+				}
+			}
+			else {
+				echo "error uploading image";
 			}
 		}
-		if ($uploadOk == 0) { //uploads stuffs to folder
-			echo "Sorry, your file was not uploaded.";
-			// if everything is ok, try to upload file
-		} else {
-			if (move_uploaded_file($_FILES["imgfile"]["name"], $img_target_dir . "/" . $_FILES["imgfile"]["name"])) {
-				echo "<br>";
-				echo "The file ". basename( $_FILES["imgfile"]["name"]). " has been uploaded.";				
-				//echo '<img src= "uploads/img/lab2_upload.png" height="300" width="300">'; //prints image
-			} else {
-				echo "Sorry, there was an error uploading your file.";
-			}
+		else {
+			echo "File not png<br>";
 		}
 
 	}
@@ -114,9 +110,9 @@ require_once('config.php');
 				$(function() {
 				$(".vote").click(function() 
 				{
-					var id = $(this).attr("IdImages");
+					var id = $(this).attr("idImages");
 					var name = $(this).attr("userId");
-					var dataString = 'IdImages='+ id ;
+					var dataString = 'idImages='+ id ;
 					var parent = $(this);
 
 					if (name=='up')
@@ -125,7 +121,7 @@ require_once('config.php');
 						$.ajax({
 						type: "POST",
 						url: "up_vote.php",
-						data: dataString,
+						data: dataString, 
 						cache: false,
 
 						success: function(html)
@@ -138,13 +134,11 @@ require_once('config.php');
 					});
 					});
 				</script>
-
-				//HTML Code
 				<h1> Voting: </h1>
 
 				<?php
-				$sql=mysql_query("SELECT filepath, votes FROM Images LIMIT 100");
-				while($row=mysql_fetch_array($sql))
+				$sql=mysqli_query($link, "SELECT filepath, votes FROM Images LIMIT 100");
+				while($row=mysqli_fetch_array($sql))
 				{
 					$votes=$row['votes'];
 					$fpath=$row['filepath'];
@@ -153,9 +147,9 @@ require_once('config.php');
 				<div class="box1">
 				<div class='up'>
 				<a href="" class="vote" id="<?php echo $votes; ?>" name="up">
-				<?php echo $fpath; ?></a></div>
+				<?php echo $votes; ?></a></div>
 
-				<div class='box2' ><?php echo $fpath; ?></div>
+				<div class='box2' ><?php echo "<img src=" . $fpath;?>
 				</div>
 
 <?php } ?>

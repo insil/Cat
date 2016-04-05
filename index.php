@@ -37,10 +37,10 @@
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2 text-center">
 		 
-					<h1>Cat Image Sharing Fanclub (logo here)</h1>
-						Create or login to vote on your favorite cat images! =^_^=
+					<h1>Cat Image Sharing Fanclub</h1>
+						<h4>Create or login to vote on your favorite cat images! =^_^= </h4>
 						<form method="post" action="login.php">
-									<div class="form-field">
+							<div class="form-field">
 								<label for="user">Username: </label>
 								<input type="text" id="user" name="user" placeholder="catlover"/>
 				
@@ -59,7 +59,7 @@
 		
 		
 	<section class="no-padding" id="portfolio">
-					<h3> Cats of the Month of March </h3>
+		<h3> Cats of the Month of March </h3>
         <div class="container-fluid">
             <div class="row no-gutter">
                 <div class="col-lg-4 col-sm-6">
