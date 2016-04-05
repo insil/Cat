@@ -38,18 +38,15 @@ require_once('config.php');
 <!-- upload file script-->		
 <?php
 
-	if(file_exists ("uploads/".$_SESSION['login_user'])){ //putting the image file into the username's folder (same name as the username, hence why we made it only numbers and letters)!
+	if(!file_exists ("uploads/".$_SESSION['login_user'])){ //making the user directory
+		mkdir("uploads/".$_SESSION['login_user'], 0777, true);		
+	}
 	
-		$img_target_dir = "uploads/".$_SESSION['login_user']; //puts stuff in uploads
-		echo $_SESSION['login_user'];
-		$target_file2 = $img_target_dir. basename($_FILES["imgfile"]["name"]); //img file
-		$uploadOk = 1;
-
-		$imageFileType = pathinfo($target_file2,PATHINFO_EXTENSION);
-	}
-	else{
-		mkdir("uploads/".$_SESSION['login_user'], 0777, true);
-	}
+	$img_target_dir = "uploads/".$_SESSION['login_user']; //puts stuff in uploads
+	echo $_SESSION['login_user'];
+	$target_file2 = $img_target_dir. basename($_FILES["imgfile"]["name"]); //img file
+	$uploadOk = 1;
+	$imageFileType = pathinfo($target_file2,PATHINFO_EXTENSION);
 	
 	
 	
@@ -75,10 +72,8 @@ require_once('config.php');
 	// if everything is ok, try to upload file
 		} else {
 			if (move_uploaded_file($_FILES["imgfile"]["name"], $img_target_dir)) {
-				//rename("tmp_name","lab2_upload");
 				echo "<br>";
 				echo "The file ". basename( $_FILES["imgfile"]["name"]). " has been uploaded.";				
-				//chmod("uploads/img/lab2_upload.png",0777); //changes permission of image
 				//echo '<img src= "uploads/img/lab2_upload.png" height="300" width="300">'; //prints image
 			} else {
 				echo "Sorry, there was an error uploading your file.";
