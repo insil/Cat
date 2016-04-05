@@ -43,7 +43,6 @@ require_once('config.php');
 	}
 	
 	$img_target_dir = "uploads/".$_SESSION['login_user']; //puts stuff in uploads
-	echo $_SESSION['login_user'];
 	$target_file2 = $img_target_dir. basename($_FILES["imgfile"]["name"]); //img file
 	$uploadOk = 1;
 	$imageFileType = pathinfo($target_file2,PATHINFO_EXTENSION);
@@ -68,10 +67,10 @@ require_once('config.php');
 			}
 		}
 		if ($uploadOk == 0) { //uploads stuffs to folder
-		echo "Sorry, your file was not uploaded.";
-	// if everything is ok, try to upload file
+			echo "Sorry, your file was not uploaded.";
+			// if everything is ok, try to upload file
 		} else {
-			if (move_uploaded_file($_FILES["imgfile"]["name"], $img_target_dir)) {
+			if (move_uploaded_file($_FILES["imgfile"]["name"], $img_target_dir . "/" . $_FILES["imgfile"]["name"])) {
 				echo "<br>";
 				echo "The file ". basename( $_FILES["imgfile"]["name"]). " has been uploaded.";				
 				//echo '<img src= "uploads/img/lab2_upload.png" height="300" width="300">'; //prints image
