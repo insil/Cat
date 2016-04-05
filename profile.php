@@ -2,7 +2,10 @@
 session_start(); // Starting Session
 require_once('config.php');
 	$link = mysqli_connect($db_host, $db_user, $db_pass, $db_name) or die ('Your DB connection is misconfigured. Enter the correct values and try again.');
-	//$query = mysqli_query(
+	$user = $_SESSION['login_user'];
+	$query = mysqli_query($link, "SELECT idUsers FROM Users WHERE user = '$user'");
+	$row=mysqli_fetch_array($query);
+	$userID=$row['idUsers'];
 ?>
 
 <html>
@@ -55,10 +58,11 @@ require_once('config.php');
 			echo $img_target_dir . "/" . $_FILES["imgfile"]["name"];
 			if($check != false) {
 				if (move_uploaded_file($_FILES["imgfile"]["tmp_name"], $img_target_dir . "/" . $_FILES["imgfile"]["name"])) {
-					//chmod("uploads/img/lab2_upload.png",0777);
-					//echo "Image file size: ";
-					//echo filesize("uploads/img/lab2_upload.png") . "<br>";
-					//echo '<img src= "uploads/img/lab2_upload.png" height="300" width="300">';
+					$filepath = $img_target_dir . "/" . $_FILES["imgfile"]["name"];
+					echo $filepath;
+					$query = "INSERT INTO Images(filepath, userId) VALUES ('$filepath', $userID)";
+					echo $query;
+					mysqli_query($link, $query);
 				}
 				else {
 					echo "file was not uploaded";
