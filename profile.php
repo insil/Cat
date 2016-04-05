@@ -42,22 +42,19 @@ require_once('config.php');
 		mkdir("uploads/".$_SESSION['login_user'], 0777, true);		
 	}
 	
-	$img_target_dir = "uploads/".$_SESSION['login_user']; //puts stuff in uploads
-	$target_file2 = $img_target_dir. basename($_FILES["imgfile"]["name"]); //img file
-	echo $_FILES["imgfile"]["name"];
-	$uploadOk = 1;
-	$imageFileType = pathinfo($target_file2,PATHINFO_EXTENSION);
-	
-	
-	
 	// Allow certain file formats for images (png)
 	// Check if image file is a actual image or fake image
 	if(isset($_POST['submit'])) {
+		$img_target_dir = "uploads/".$_SESSION['login_user']; //puts stuff in uploads
+		$target_file2 = $img_target_dir. basename($_FILES["imgfile"]["name"]); //img file
+		echo $_FILES["imgfile"]["name"];
+		$uploadOk = 1;
+		$imageFileType = pathinfo($target_file2,PATHINFO_EXTENSION);
 		if($imageFileType == "png") {
 			$check = getimagesize($_FILES["imgfile"]["tmp_name"]);
 			echo $img_target_dir . "/" . $_FILES["imgfile"]["name"];
 			if($check != false) {
-				if (move_uploaded_file($_FILES["imgfile"]["name"], $img_target_dir . "/" . $_FILES["imgfile"]["name"])) {
+				if (move_uploaded_file($_FILES["imgfile"]["tmp_name"], $img_target_dir . "/" . $_FILES["imgfile"]["name"])) {
 					//chmod("uploads/img/lab2_upload.png",0777);
 					//echo "Image file size: ";
 					//echo filesize("uploads/img/lab2_upload.png") . "<br>";
@@ -110,11 +107,11 @@ require_once('config.php');
 				$(function() {
 				$(".vote").click(function() 
 				{
-					var id = $(this).attr("idImages");
-					var name = $(this).attr("userId");
-					var dataString = 'idImages='+ id ;
+					var id = $(this).attr("id");
+					var name = $(this).attr("name");
+					var dataString = 'id='+ id ;
 					var parent = $(this);
-
+					//document.write(dataString);
 					if (name=='up')
 					{
 						$(this).fadeIn(200).html('<img src="dot.gif" />');
@@ -137,19 +134,21 @@ require_once('config.php');
 				<h1> Voting: </h1>
 
 				<?php
-				$sql=mysqli_query($link, "SELECT filepath, votes FROM Images LIMIT 100");
+				$sql=mysqli_query($link, "SELECT idImages, filepath, votes, userId FROM Images LIMIT 100");
 				while($row=mysqli_fetch_array($sql))
 				{
 					$votes=$row['votes'];
 					$fpath=$row['filepath'];
+					$idImages=$row['idImages'];
+					$userId=$row['userId'];
 				?>
 				<div class="main"> 
 				<div class="box1">
 				<div class='up'>
-				<a href="" class="vote" id="<?php echo $votes; ?>" name="up">
+				<a href="" class="vote" id="<?php echo $idImages; ?>" name="up">
 				<?php echo $votes; ?></a></div>
 
-				<div class='box2' ><?php echo "<img src=" . $fpath;?>
+				<div class='box2' ><?php echo "<img src=" . $fpath . ">";?>
 				</div>
 
 <?php } ?>
