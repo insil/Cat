@@ -38,18 +38,19 @@ require_once('config.php');
 <!-- upload file script-->		
 <?php
 
-	if(!file_exists ("uploads/".$_SESSION['login_user']){ //putting the image file into the username's folder (same name as the username, hence why we made it only numbers and letters)!
+	if(file_exists ("uploads/".$_SESSION['login_user'])){ //putting the image file into the username's folder (same name as the username, hence why we made it only numbers and letters)!
 	
 		$img_target_dir = "uploads/".$_SESSION['login_user']; //puts stuff in uploads
+		echo $_SESSION['login_user'];
 		$target_file2 = $img_target_dir. basename($_FILES["imgfile"]["name"]); //img file
 		$uploadOk = 1;
 
 		$imageFileType = pathinfo($target_file2,PATHINFO_EXTENSION);
-		echo $imageFileType;
 	}
 	else{
 		mkdir("uploads/".$_SESSION['login_user'], 0777, true);
 	}
+	
 	
 	
 	// Allow certain file formats for images (png)
@@ -111,6 +112,60 @@ require_once('config.php');
 				</div>
 			</div>
 		</div>
+		
+ <!-- Source http://www.9lessons.info/2009/08/vote-with-jquery-ajax-and-php.html-->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/
+				libs/jquery/1.3.0/jquery.min.js"></script>
+				<script type="text/javascript">
+				$(function() {
+				$(".vote").click(function() 
+				{
+					var id = $(this).attr("IdImages");
+					var name = $(this).attr("userId");
+					var dataString = 'IdImages='+ id ;
+					var parent = $(this);
+
+					if (name=='up')
+					{
+						$(this).fadeIn(200).html('<img src="dot.gif" />');
+						$.ajax({
+						type: "POST",
+						url: "up_vote.php",
+						data: dataString,
+						cache: false,
+
+						success: function(html)
+				{
+					parent.html(html);
+				} 
+				});
+				}
+				return false;
+					});
+					});
+				</script>
+
+				//HTML Code
+				<h1> Voting: </h1>
+
+				<?php
+				$sql=mysql_query("SELECT filepath, votes FROM Images LIMIT 100");
+				while($row=mysql_fetch_array($sql))
+				{
+					$votes=$row['votes'];
+					$fpath=$row['filepath'];
+				?>
+				<div class="main"> 
+				<div class="box1">
+				<div class='up'>
+				<a href="" class="vote" id="<?php echo $votes; ?>" name="up">
+				<?php echo $fpath; ?></a></div>
+
+				<div class='box2' ><?php echo $fpath; ?></div>
+				</div>
+
+<?php } ?>
+		
 	</section>
 
 		<!-- scripts from Creative -->

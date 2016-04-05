@@ -8,7 +8,7 @@
 							<a class="page-scroll" href="profile.php">User Account</a>
 						</li>
 						<li>
-							<a class="page-scroll" href="admin.php">Admin Panel</a>
+							<a class="page-scroll" href="admin.php">Admin Panel</a> <!-- add php stuff -->
 						</li>
 						<li>
 							<a class="page-scroll" href="logout.php">Sign Out</a>
