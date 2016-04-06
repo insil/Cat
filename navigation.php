@@ -20,7 +20,7 @@ if(isset($_SESSION['login_user'])) {
 							<a class="page-scroll" href="profile.php">User Account</a>
 						</li>
 						<li>
-						<?php if(isset($user) ) {?> 
+						<?php if(isset($_SESSION['login_user']) ) {?> 
 							<a class="page-scroll" href="voteview.php">Vote</a> <!-- add php stuff -->
 						<?php } ?>
 						</li>

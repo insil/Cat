@@ -37,58 +37,21 @@ require_once('config.php');
 	<h1> Welcome, <?php 
 	echo $_SESSION['login_user']; ?> !</h1>
 	
-
-<!-- upload file script-->		
-<?php
-
-	if(!file_exists ("uploads/".$_SESSION['login_user'])){ //making the user directory
-		mkdir("uploads/".$_SESSION['login_user'], 0777, true);		
-	}
-	
-	// Allow certain file formats for images (png)
-	// Check if image file is a actual image or fake image
-	if(isset($_POST['submit'])) {
-		$img_target_dir = "uploads/".$_SESSION['login_user']; //puts stuff in uploads
-		$target_file2 = $img_target_dir. basename($_FILES["imgfile"]["name"]); //img file
-		//echo $_FILES["imgfile"]["name"];
-		$uploadOk = 1;
-		$imageFileType = pathinfo($target_file2,PATHINFO_EXTENSION);
-		if($imageFileType == "png") {
-			$check = getimagesize($_FILES["imgfile"]["tmp_name"]);
-			//echo $img_target_dir . "/" . $_FILES["imgfile"]["name"];
-			if($check != false) {
-				$filepath = $img_target_dir . "/" . $_FILES["imgfile"]["name"];
-				$filepath = str_replace(' ', '_', $filepath);
-				$filepath = str_replace('#', '', $filepath);
-				if (move_uploaded_file($_FILES["imgfile"]["tmp_name"], $filepath)) {
-					$query = "INSERT INTO Images(filepath, userId) VALUES ('$filepath', $userID)";
-					mysqli_query($link, $query);
-				}
-				else {
-					echo "file was not uploaded";
-				}
-			}
-			else {
-				echo "error uploading image";
-			}
-		}
-		else {
-			echo "File not png<br>";
-		}
-
-	}
-	
-?>
-		
-    <!-- FORM FOR PHP UPLOAD -->		
 	<section class="bg-primary" id="about">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2 text-center">
 					<h5>Site Statistics: </h5>
-					
-					
-					
+					<?php
+					$query = "SELECT COUNT(idUsers) FROM Users";
+					$query2 = "SELECT COUNT(idImages) FROM Images";
+					$userRows = mysqli_query($link, $query);
+					$imageRows = mysqli_query($link, $query2);
+					$numUsers = mysqli_fetch_row($userRows);
+					$numImages = mysqli_fetch_row($imageRows);
+					echo "Number of users: " . $numUsers[0] . "<br>";
+					echo "Number of images: " . $numImages[0] . "<br>";
+					?>				
 				</div>
 			</div>
 		</div>
