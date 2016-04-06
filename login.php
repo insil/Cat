@@ -23,7 +23,6 @@ if (empty($_POST['user']) || empty($_POST['password'])) {
 			header("location: profile.php"); // Redirecting To Other Page
 	} else {
 		$error = "Username or Password is invalid!!";
-		echo $rows;
 		echo $error;
 	}
 	mysqli_close($link); // Closing Connection

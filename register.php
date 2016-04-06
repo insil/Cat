@@ -123,7 +123,6 @@ if(empty($errors)){
 						<div class="form-field">
 							<label for="passwordconfirm">Confirmation password:</label>
 							<input type="text" id="passwordconfirm" name="passwordconfirm" placeholder="*******" value="<?php echo $passwordconfirm;?>">
-							<span class="error">* <?php echo $passwordconfirmErr;?></span>
 						</div>
 					
 					

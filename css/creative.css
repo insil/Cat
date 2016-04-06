@@ -5,6 +5,46 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+ @import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic);
+
+
+ 
+#main
+{
+height:80px; 
+border:1px dashed #29ABE2;
+margin-bottom:7px;
+width:500px;
+}
+.box1
+{
+float:right; 
+height:35px; 
+width:30px;
+}
+.box2
+{
+float:left; 
+width:10px;
+text-align:left;
+margin-left:1px;
+height:10px;
+margin-top:1px;
+font-weight:bold;
+font-size:10px;
+}
+.up
+{
+height:20px; 
+font-size:14px; 
+text-align:center;
+background-color:#fff; 
+margin-bottom:0.1px;
+-moz-border-radius: 6px;
+-webkit-border-radius: 6px;
+}
+
+
 html,
 body {
     width: 100%;
@@ -13,38 +53,8 @@ body {
 }
 
 .form-field{
-	color: #2b2024;
+	color: #fff;
 }
-
-
-.box1
-{
-float:left; 
-height:80px; 
-width:50px;
-}
-.box2
-{
-float:left; 
-width:440px;
-text-align:left;
-margin-left:10px;
-height:60px;
-margin-top:10px;
-font-weight:bold;
-font-size:18px;
-}
-.up
-{
-height:40px; 
-font-size:24px; 
-text-align:center;
-background-color:#009900; 
-margin-bottom:2px;
--moz-border-radius: 6px;
--webkit-border-radius: 6px;
-}
-
 
 body {
     font-family: Merriweather,'Helvetica Neue',Arial,sans-serif;
@@ -61,7 +71,7 @@ hr.light {
 }
 
 a {
-    color: #8b726c;
+    color: #403735;
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;
@@ -72,16 +82,20 @@ a:focus {
     color: #78483e;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
+h1
+h2
+h4
+h5
 h6 {
-    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+    font-family: "Noto Sans";
 	color: #fff;
 }
 
+h3
+{
+    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+	color: #78483e;
+}
 p {
     margin-bottom: 20px;
     font-size: 16px;
@@ -89,7 +103,7 @@ p {
 }
 
 .bg-primary {
-    background-color: #8b726c;
+    background-color: #333;
 }
 
 .bg-dark {
@@ -102,7 +116,7 @@ p {
 }
 
 section {
-    padding: 100px 0;
+    padding: 10px 0;
 }
 
 aside {
@@ -115,7 +129,7 @@ aside {
 
 .navbar-default {
     border-color: rgba(34,34,34,.05);
-    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+    font-family: "Noto Sans";
     background-color: #fff;
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
@@ -124,9 +138,9 @@ aside {
 
 .navbar-default .navbar-header .navbar-brand {
     text-transform: uppercase;
-    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+    font-family: "Noto Sans";
     font-weight: 700;
-    color: #79625d;
+    color: #403735;
 }
 
 .navbar-default .navbar-header .navbar-brand:hover,
@@ -144,12 +158,12 @@ aside {
 
 .navbar-default .nav > li>a:hover,
 .navbar-default .nav>li>a:focus:hover {
-    color: #79625d;
+    color: #403735;
 }
 
 .navbar-default .nav > li.active>a,
 .navbar-default .nav>li.active>a:focus {
-    color: #79625d!important;
+    color: #403735!important;
     background-color: transparent;
 }
 
@@ -170,7 +184,7 @@ aside {
 
     .navbar-default .navbar-header .navbar-brand:hover,
     .navbar-default .navbar-header .navbar-brand:focus {
-        color: #b7aca9;
+        color: #403735;
     }
 
     .navbar-default .nav > li>a,
@@ -311,7 +325,7 @@ header .header-content .header-content-inner p {
     text-align: center;
     color: #fff;
     opacity: 0;
-    background: rgba(240,95,64,.9);
+    background: rgb(174, 158, 159);
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;
@@ -480,10 +494,11 @@ fieldset[disabled] .btn-primary.active {
     text-transform: uppercase;
     font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
     font-weight: 700;
+	font-size: 9;
 }
 
 .btn-xl {
-    padding: 15px 30px;
+    padding: 10px 20px;
 }
 
 ::-moz-selection {

@@ -2,7 +2,10 @@
 session_start(); // Starting Session
 require_once('config.php');
 	$link = mysqli_connect($db_host, $db_user, $db_pass, $db_name) or die ('Your DB connection is misconfigured. Enter the correct values and try again.');
-	//$query = mysqli_query(
+	$user = $_SESSION['login_user'];
+	$query = mysqli_query($link, "SELECT idUsers FROM Users WHERE user = '$user'");
+	$row=mysqli_fetch_array($query);
+	$userID=$row['idUsers'];
 ?>
 
 <html>
@@ -42,46 +45,41 @@ require_once('config.php');
 		mkdir("uploads/".$_SESSION['login_user'], 0777, true);		
 	}
 	
-	$img_target_dir = "uploads/".$_SESSION['login_user']; //puts stuff in uploads
-	$target_file2 = $img_target_dir. basename($_FILES["imgfile"]["name"]); //img file
-	$uploadOk = 1;
-	$imageFileType = pathinfo($target_file2,PATHINFO_EXTENSION);
-	
-	
-	
 	// Allow certain file formats for images (png)
 	// Check if image file is a actual image or fake image
 	if(isset($_POST['submit'])) {
-		if($imageFileType != "png" ) {
-			echo "Sorry, only PNG.";
-			$uploadOk = 0;
-		}
-		else{
+		$img_target_dir = "uploads/".$_SESSION['login_user']; //puts stuff in uploads
+		$target_file2 = $img_target_dir. basename($_FILES["imgfile"]["name"]); //img file
+		//echo $_FILES["imgfile"]["name"];
+		$uploadOk = 1;
+		$imageFileType = pathinfo($target_file2,PATHINFO_EXTENSION);
+		if($imageFileType == "png") {
 			$check = getimagesize($_FILES["imgfile"]["tmp_name"]);
-			if($check !== false) {
-				echo "File is an image " . $check["mime"] . ".";
-				$uploadOk = 1;
-			} else {
-				echo "File is not an image.";
-				$uploadOk = 0;
+			//echo $img_target_dir . "/" . $_FILES["imgfile"]["name"];
+			if($check != false) {
+				$filepath = $img_target_dir . "/" . $_FILES["imgfile"]["name"];
+				$filepath = str_replace(' ', '_', $filepath);
+				$filepath = str_replace('#', '', $filepath);
+				if (move_uploaded_file($_FILES["imgfile"]["tmp_name"], $filepath)) {
+					$query = "INSERT INTO Images(filepath, userId) VALUES ('$filepath', $userID)";
+					mysqli_query($link, $query);
+				}
+				else {
+					echo "file was not uploaded";
+				}
+			}
+			else {
+				echo "error uploading image";
 			}
 		}
-		if ($uploadOk == 0) { //uploads stuffs to folder
-			echo "Sorry, your file was not uploaded.";
-			// if everything is ok, try to upload file
-		} else {
-			if (move_uploaded_file($_FILES["imgfile"]["name"], $img_target_dir . "/" . $_FILES["imgfile"]["name"])) {
-				echo "<br>";
-				echo "The file ". basename( $_FILES["imgfile"]["name"]). " has been uploaded.";				
-				//echo '<img src= "uploads/img/lab2_upload.png" height="300" width="300">'; //prints image
-			} else {
-				echo "Sorry, there was an error uploading your file.";
-			}
+		else {
+			echo "File not png<br>";
 		}
 
 	}
 	
 ?>
+
 		
     <!-- FORM FOR PHP UPLOAD -->		
 	<section class="bg-primary" id="about">
@@ -90,15 +88,15 @@ require_once('config.php');
 				<div class="col-lg-8 col-lg-offset-2 text-center">
 
 				<!-- Upload image-->	
-					<h2> Image Upload </h2>
-					<h4> Ensure that the file upload is a PNG file!</h4>
+					<h1> Image Upload </h1>
+					 Ensure that the file upload is a PNG file!
 					
 					
 					<form action="profile.php" method="post" enctype="multipart/form-data">
 
 						<div><h2>Upload a PNG file: </h2>
 						<input class="btn btn-default btn-xl wow tada" id="imgfile" type="file" name="imgfile" value="imgfile">
-							<br>
+							<br><br>
 							<input class="btn btn-default btn-xl wow tada" id="Upload" type="submit" name="submit" value="Upload">
 						</div>
 	
@@ -106,60 +104,37 @@ require_once('config.php');
 				</div>
 			</div>
 		</div>
-		
- <!-- Source http://www.9lessons.info/2009/08/vote-with-jquery-ajax-and-php.html-->
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/
-				libs/jquery/1.3.0/jquery.min.js"></script>
-				<script type="text/javascript">
-				$(function() {
-				$(".vote").click(function() 
-				{
-					var id = $(this).attr("IdImages");
-					var name = $(this).attr("userId");
-					var dataString = 'IdImages='+ id ;
-					var parent = $(this);
 
-					if (name=='up')
-					{
-						$(this).fadeIn(200).html('<img src="dot.gif" />');
-						$.ajax({
-						type: "POST",
-						url: "up_vote.php",
-						data: dataString,
-						cache: false,
+	</section>
+	
+		<section class="bg-primary" id="about">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2 text-center">
+				<h2> Your Uploaded Image/s: </h2>
 
-						success: function(html)
-				{
-					parent.html(html);
-				} 
-				});
-				}
-				return false;
-					});
-					});
-				</script>
-
-				//HTML Code
-				<h1> Voting: </h1>
 
 				<?php
-				$sql=mysql_query("SELECT filepath, votes FROM Images LIMIT 100");
-				while($row=mysql_fetch_array($sql))
+					$sql=mysqli_query($link, "SELECT idImages, filepath, votes FROM Images WHERE userID = $userID LIMIT 100");
+				while($row=mysqli_fetch_array($sql))
 				{
 					$votes=$row['votes'];
 					$fpath=$row['filepath'];
+					$idImages=$row['idImages'];
 				?>
-				<div class="main"> 
-				<div class="box1">
-				<div class='up'>
-				<a href="" class="vote" id="<?php echo $votes; ?>" name="up">
-				<?php echo $fpath; ?></a></div>
-
-				<div class='box2' ><?php echo $fpath; ?></div>
-				</div>
-
-<?php } ?>
-		
+			
+	<!-- div resize -->			
+	<section class="no-padding" id="portfolio">
+        <div class="container-fluid">
+            <div class="row no-gutter">
+                <div class="col-lg-4 col-sm-6">
+                    <a href="#" class="portfolio-box">
+					<?php echo "<img src=" . $fpath . " class=\"img-responsive\" alt=\"\">";?>
+                    </a>
+                </div>
+			
+				<?php } ?>
+		</div></div>
 	</section>
 
 		<!-- scripts from Creative -->
