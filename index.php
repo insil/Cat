@@ -1,4 +1,6 @@
-	<?php require_once('config.php');
+	<?php 
+	session_start();
+	require_once('config.php');
 	$link = mysqli_connect($db_host, $db_user, $db_pass, $db_name) or die ('Your DB connection is misconfigured. Enter the correct values and try again.');
 	//$query = mysqli_query(
 	  //'SELECT idImages, votes
@@ -37,10 +39,10 @@
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2 text-center">
 		 
-					<h1>Cat Image Sharing Fanclub (logo here)</h1>
-						Create or login to vote on your favorite cat images! =^_^=
+					<h1>Cat Image Sharing Fanclub</h1>
+						<h4>Create or login to vote on your favorite cat images! =^_^= </h4>
 						<form method="post" action="login.php">
-									<div class="form-field">
+							<div class="form-field">
 								<label for="user">Username: </label>
 								<input type="text" id="user" name="user" placeholder="catlover"/>
 				
@@ -59,101 +61,34 @@
 		
 		
 	<section class="no-padding" id="portfolio">
-					<h3> Cats of the Month of March </h3>
+		<h1>Top Voted Cats</h1>
         <div class="container-fluid">
             <div class="row no-gutter">
+				<?php 
+				$sql=mysqli_query($link, "SELECT idImages, filepath, votes FROM Images ORDER BY votes DESC LIMIT 6");
+				$count = 0;
+				while($row=mysqli_fetch_array($sql))
+				{
+					$votes=$row['votes'];
+					$fpath=$row['filepath'];
+					$idImages=$row['idImages'];
+				?>
                 <div class="col-lg-4 col-sm-6">
                     <a href="#" class="portfolio-box">
-                        <img src="img/portfolio/1.jpg" class="img-responsive" alt="">
+                        <img src=<?php echo $fpath; ?> class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
-                                    Cutie Short Hair Cat "Bi" uploaded by User2
+                                    <?php echo $idImages; ?>
                                 </div>
                                 <div class="project-name">
-                                    Votes: 1011101901
+                                    <?php echo $votes; ?>
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="img/portfolio/2.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Tiny kitty Jiro uploaded by User1
-                                </div>
-                                <div class="project-name">
-                                    Votes: 101010
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="img/portfolio/3.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Jiro HotDog Cat uploaded by User1
-                                </div>
-                                <div class="project-name">
-                                    Votes: 10111
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="img/portfolio/4.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Nomi's little feet uploaded by User3
-                                </div>
-                                <div class="project-name">
-                                    Votes: 1101
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="img/portfolio/5.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Black Short Hair Jiji featuring Resseti 
-									Uploaded by User4
-                                </div>
-                                <div class="project-name">
-                                    Votes: 101
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="img/portfolio/6.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Jiro's Box 
-									Uploaded by User1
-                                </div>
-                                <div class="project-name">
-                                    Votes: 11
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+				<?php } ?>
             </div>
         </div>
     </section>
