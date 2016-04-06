@@ -79,62 +79,19 @@ require_once('config.php');
 	}
 	
 ?>
-
 		
     <!-- FORM FOR PHP UPLOAD -->		
 	<section class="bg-primary" id="about">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2 text-center">
-
-				<!-- Upload image-->	
-					<h2> Image Upload </h2>
-					 Ensure that the file upload is a PNG file!
+					<h5>Site Statistics: </h5>
 					
 					
-					<form action="profile.php" method="post" enctype="multipart/form-data">
-
-						<div><h2>Upload a PNG file: </h2>
-						<input class="btn btn-default btn-xl wow tada" id="imgfile" type="file" name="imgfile" value="imgfile">
-							<br>
-							<input class="btn btn-default btn-xl wow tada" id="Upload" type="submit" name="submit" value="Upload">
-						</div>
-	
-					</form>
+					
 				</div>
 			</div>
 		</div>
-
-	</section>
-	
-		<section class="bg-primary" id="about">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-lg-offset-2 text-center">
-				<h4> Your Upload Images: </h4>
-
-
-				<?php
-					$sql=mysqli_query($link, "SELECT idImages, filepath, votes FROM Images WHERE userID = $userID LIMIT 100");
-				while($row=mysqli_fetch_array($sql))
-				{
-					$votes=$row['votes'];
-					$fpath=$row['filepath'];
-					$idImages=$row['idImages'];
-				?>
-			
-	<!-- div resize -->			
-	<section class="no-padding" id="portfolio">
-        <div class="container-fluid">
-            <div class="row no-gutter">
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-					<?php echo "<img src=" . $fpath . " class=\"img-responsive\" alt=\"\">";?>
-                    </a>
-                </div>
-			
-				<?php } ?>
-		</div></div>
 	</section>
 
 		<!-- scripts from Creative -->
