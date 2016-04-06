@@ -35,7 +35,7 @@ require_once('config.php');
 	<?php include 'navigation.php';?>
 	
 	<h1> Welcome, <?php 
-	//echo $_SESSION['login_user']; ?> !</h1>
+	echo $_SESSION['login_user']; ?> !</h1>
 	
 
 <!-- upload file script-->		
@@ -138,13 +138,12 @@ require_once('config.php');
 				<h1> Voting: </h1>
 
 				<?php
-				$sql=mysqli_query($link, "SELECT idImages, filepath, votes, userId FROM Images LIMIT 100");
+				$sql=mysqli_query($link, "SELECT idImages, filepath, votes FROM Images WHERE userID = $userID LIMIT 100");
 				while($row=mysqli_fetch_array($sql))
 				{
 					$votes=$row['votes'];
 					$fpath=$row['filepath'];
 					$idImages=$row['idImages'];
-					$userId=$row['userId'];
 				?>
 				<div class="main"> 
 				<div class="box1">
