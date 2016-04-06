@@ -35,7 +35,7 @@ require_once('config.php');
 	<?php include 'navigation.php';?>
 	
 	<h1> Welcome, <?php 
-	echo $_SESSION['login_user']; ?> !</h1>
+	//echo $_SESSION['login_user']; ?> !</h1>
 	
 
 <!-- upload file script-->		
@@ -50,18 +50,18 @@ require_once('config.php');
 	if(isset($_POST['submit'])) {
 		$img_target_dir = "uploads/".$_SESSION['login_user']; //puts stuff in uploads
 		$target_file2 = $img_target_dir. basename($_FILES["imgfile"]["name"]); //img file
-		echo $_FILES["imgfile"]["name"];
+		//echo $_FILES["imgfile"]["name"];
 		$uploadOk = 1;
 		$imageFileType = pathinfo($target_file2,PATHINFO_EXTENSION);
 		if($imageFileType == "png") {
 			$check = getimagesize($_FILES["imgfile"]["tmp_name"]);
-			echo $img_target_dir . "/" . $_FILES["imgfile"]["name"];
+			//echo $img_target_dir . "/" . $_FILES["imgfile"]["name"];
 			if($check != false) {
-				if (move_uploaded_file($_FILES["imgfile"]["tmp_name"], $img_target_dir . "/" . $_FILES["imgfile"]["name"])) {
-					$filepath = $img_target_dir . "/" . $_FILES["imgfile"]["name"];
-					echo $filepath;
+				$filepath = $img_target_dir . "/" . $_FILES["imgfile"]["name"];
+				$filepath = str_replace(' ', '_', $filepath);
+				$filepath = str_replace('#', '', $filepath);
+				if (move_uploaded_file($_FILES["imgfile"]["tmp_name"], $filepath)) {
 					$query = "INSERT INTO Images(filepath, userId) VALUES ('$filepath', $userID)";
-					echo $query;
 					mysqli_query($link, $query);
 				}
 				else {
