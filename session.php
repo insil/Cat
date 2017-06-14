@@ -2,7 +2,7 @@
 require('config.php');
 
 session_start();// Starting Session
-// Storing Session
+// Storing Session :D
 $user_check=$_SESSION['login_user'];
 // SQL Query To Fetch Complete Information Of User
 $ses_sql=mysqli_query($conn, "select `email` from newacc where `email`='$user_check'");
