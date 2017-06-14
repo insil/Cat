@@ -1,16 +1,16 @@
-Idea
+##Idea
 Image system such as Flickr but only for cat images. Users may upload images of their cats and there is a voting system based off the quality and content (cuteness) of the cats. Users will also be required to sign up to upload images and to vote but users without an account can browse through the pictures.
  
 We believe people love cat photos, as well it will be interesting to implement a voting system that will allow for the cuter pictures to be more apparent than the ones with lesser quality. This idea will cover all if not most of the topics we have learned during our course lectures and assignments while allowing us to look into different ways of implementing them through new features such as a voting and commenting system.
 
-Features
+##Features
 User account creation
 User authentication
 User account page: edit information, overview of images, and comments
 login, logout, edit information, sign up
 Feasibility: It will be crucial to include user account creation and user accounts in general as without the feature the system would not be complete and would lack many of the other features (i.e. commenting, voting.) User authentication and account creation will be created much like how we learned during lectures and assignments. A database would be created to hold the user information and user authentication will be done through php and possibly regex statements.
  
-User interface 
+##User interface 
 Account page, image viewing page, top image page
 User information will be displayed from the database onto the current page for the user
 Feasibility: User interface will encompass some CSS, HTML, and PHP statements for updating the page’s information based off the user input much like how we learned to do so in form fill in assignments that required a redirect/success page listing the information the user inputted. The use of sessions may be useful in this area and will be researched into.
