@@ -26,7 +26,7 @@
 		  } else {
 			$votes = --$data['votes'];
 		  }
-		  # update new voting score
+		  # update new (WOO!) voting score
 		  mysql_query("
 			UPDATE Images
 			SET votes = '{$votes}'
