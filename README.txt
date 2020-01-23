@@ -1,4 +1,4 @@
-## Idea
+##Idea
 Image system such as Flickr but only for cat images. Users may upload images of their cats and there is a voting system based off the quality and content (cuteness) of the cats. Users will also be required to sign up to upload images and to vote but users without an account can browse through the pictures.
  
 We believe people love cat photos, as well it will be interesting to implement a voting system that will allow for the cuter pictures to be more apparent than the ones with lesser quality. This idea will cover all if not most of the topics we have learned during our course lectures and assignments while allowing us to look into different ways of implementing them through new features such as a voting and commenting system.
